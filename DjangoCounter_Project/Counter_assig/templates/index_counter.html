@@ -1,0 +1,42 @@
+<!-- Counter Assignment
+Author by :Rahma Fares
+Email :Rahmafaris981@gmail.com-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_counter.css' %}">
+</head>
+
+<body>
+    <h1>Welcome to the Counter App!</h1>
+    <h2>You have visited this site {{ visit_count }} times.</h2><!--get data from back end  -->
+    <h3>Counter value: {{ counter }}</h3>
+
+    <form action="{% url 'increment_by_2' %}" method="post"><!--follow incrementby2 link -->
+        {% csrf_token %}
+        <button class="inctrementBtnby2" type="submit">Add two Visits !</button>
+    </form>
+    <form action="{% url 'increment' %}" method="post"><!--follow increment link -->
+        {% csrf_token %}
+        <label for="increment_value">Increment by:</label>
+        <input type="number" name="increment_value" id="increment_value" value="1">
+        <button class="inctrementBtn" type="submit">Increment</button>
+    </form>
+    <div class="buttonContainer">
+        <form action="{% url 'destroy_session' %}" method="post"><!--follow destroy_session link -->
+            {% csrf_token %}
+            <button type="submit" class="clearSessionBtn">Clear Session</button>
+        </form>
+        <form action="{% url 'reset_counter' %}" method="post"><!--follow reset link -->
+            {% csrf_token %}
+            <button type="submit" class="restCounterBtn">Reset Counter</button>
+        </form>
+    </div>
+</body>
+
+</html>
